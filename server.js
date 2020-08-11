@@ -1,21 +1,38 @@
 const express = require('express') //agrego express al proyecto
 const app = express() // asigno a app las funciones de express
- 
+const hbs = require('hbs'); 
+
+require('./hbs/helpers')
+
 app.use((express.static(__dirname + '/public'))); //para crear direccion estatica
                                                 // y le mando la ruta publica
-//para las peticiones y respuestas
-// app.get('/', function (req, res) {
+
+hbs.registerPartials(__dirname + '/views/parciales');
+
+app.set('view engine', 'hbs'); //Para usar handlebars - plantillas ràpidas
 
 
-// let salida={
-//     nombre:'Pablo',
-//     edad:37,
-//     url:req.url
-// }
+//para las peticiones y respuestas por cada página
+ app.get('/', function (req, res) {
 
-// res.send(salida) //envío el json de salida y Express lo reconoce
+//renderizar en la web el archivo handlebar
+    res.render('home',{
+        nombre:'Pablo'
+        
+    
+    })
+   
+ });
 
-// });
+ app.get('/about', function(req,res){
+
+    res.render('about',{
+
+            imagen:'assets/img/node.jpg',
+            
+    })
+
+ })
 // //Para manejar otra url por ejemplo: /data
 // app.get('/data', function (req, res) {
 //       res.send('Hola Data')
