@@ -4,6 +4,8 @@ const hbs = require('hbs');
 
 require('./hbs/helpers')
 
+const port = process.env.PORT || 3000;
+
 app.use((express.static(__dirname + '/public'))); //para crear direccion estatica
                                                 // y le mando la ruta publica
 
@@ -41,4 +43,4 @@ app.set('view engine', 'hbs'); //Para usar handlebars - plantillas ràpidas
 
  //Configuro el puerto que va a estar escuchando
  // Mando un callback con el mensaje
-app.listen(3000,()=>console.log('Escuchando en el puerto 3000'))
+app.listen(port,()=>console.log(`Escuchando en el puerto ${port}`))
